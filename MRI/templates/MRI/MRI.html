@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">Listado de MRIs</h2>
+        <a href="/MRICreate" class="btn btn-success">
+            <i class="fas fa-plus"></i> Nuevo MRI
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-primary text-center">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for measurement in page_obj %}
+                <tr>
+                    <td>{{ measurement.cliente.name }}</td>
+                    <td>{{ measurement.fecha }}</td>
+                    <td>{{ measurement.hora }}</td>
+                    <td>{{ measurement.descripcion }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No hay registros de MRI.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Navegación entre páginas -->
+    <div class="d-flex justify-content-center mt-4">
+        <nav>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo; Primera</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Primera</span></li>
+                    <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+                {% endif %}
+
+                <li class="page-item active">
+                    <span class="page-link">
+                        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                    </span>
+                </li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
+                    <li class="page-item disabled"><span class="page-link">Última</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
+{% endblock %}

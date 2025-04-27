@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Crear nuevo Cliente</h4>
+        </div>
+        <div class="card-body">
+
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="/" class="btn btn-outline-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Crear Cliente</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
