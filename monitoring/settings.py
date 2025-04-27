@@ -80,13 +80,14 @@ WSGI_APPLICATION = 'monitoring.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'basedata_db',
-        'USER': 'basedata_user',
+        'NAME': 'monitoring_db',
+        'USER': 'monitoring_user',
         'PASSWORD': 'isis2503',
-        'HOST': '10.128.0.2',
-        'PORT': '5432',
+        'HOST': '10.128.0.52',
+        'PORT': '',
     }
 }
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
