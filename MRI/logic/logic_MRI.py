@@ -1,26 +1,38 @@
-from collections import Counter
+import logging
+
+logger = logging.getLogger('django')
+
 from ..models import MRI, Cliente
 
 def get_mris():
+    logger.info("Consulta de todos los MRIs solicitada.")
     return MRI.objects.all().order_by('id')
 
 
 def get_mri(user_pk):
+    logger.info(f"Consulta del último MRI para el cliente {user_pk}")
     mri = MRI.objects.filter(cliente=user_pk).order_by('-fecha', '-hora').first()
     return mri
 
 def update_mri(mri_pk, new_data):
     try:
-        mri = MRI.objects.get(pk=mri_pk) 
+        mri = MRI.objects.get(pk=mri_pk)
         mri.descripcion = new_data.get("descripcion", mri.descripcion)
         mri.fecha = new_data.get("fecha", mri.fecha)
         mri.hora = new_data.get("hora", mri.hora)
         mri.save()
+        logger.info(f"MRI actualizado exitosamente: ID {mri_pk}")
         return mri
     except MRI.DoesNotExist:
+        logger.error(f"Intento fallido de actualizar MRI: ID {mri_pk} no encontrado")
         return None
 
 def create_mri(form):
-    measurement = form.save()
-    measurement.save()
-    return ()
+    try:
+        measurement = form.save()
+        measurement.save()
+        logger.info(f"MRI creado exitosamente: {measurement.descripcion}")
+        return ()
+    except Exception as e:
+        logger.error(f"Error creando MRI: {str(e)}")
+        raise e
