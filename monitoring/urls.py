@@ -24,5 +24,5 @@ urlpatterns = [
     path('', include('MRI.urls')),
     path('', include('cliente.urls')),
     path('', include('alarms.urls')),
-    path('health_check/', views.healtCheck)
+    
 ]
