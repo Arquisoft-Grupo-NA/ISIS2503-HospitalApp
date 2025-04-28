@@ -1,4 +1,4 @@
-rom django.http import JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 
 def index(request):
