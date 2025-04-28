@@ -1,5 +1,5 @@
 from django.db import models
-from cliente.models import Cliente
+from cliente.models import cliente
 from MRI.models import MRI
 
 class Alarm(models.Model):
