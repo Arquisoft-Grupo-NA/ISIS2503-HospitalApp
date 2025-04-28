@@ -9,6 +9,15 @@ def get_clientes():
     queryset = Cliente.objects.all()
     return (queryset)
 
+def get_cliente_by_id(cliente_id):
+    try:
+        cliente = Cliente.objects.get(id=cliente_id)
+        logger.info(f"Cliente encontrado: {cliente.name}")
+        return cliente
+    except Cliente.DoesNotExist:
+        logger.error(f"Cliente con ID {cliente_id} no encontrado.")
+        return None
+
 def create_cliente(form):
     try:
         measurement = form.save()
