@@ -1,24 +1,23 @@
 from django.db import models
-from variables.models import Variable
-from measurements.models import Measurement
+from cliente.models import Cliente
+from MRI.models import MRI
 
 class Alarm(models.Model):
-    variable = models.ForeignKey(Variable, on_delete=models.CASCADE, default=None)
-    measurement = models.ForeignKey(Measurement, on_delete=models.CASCADE, default=None)
-    value = models.FloatField(null=True, blank=True, default=None)
-    limitExceeded = models.FloatField(null=True, blank=True, default=None)
+    cliente = models.ForeignKey(cliente, on_delete=models.CASCADE, default=None)
+    MRI = models.ForeignKey(MRI, on_delete=models.CASCADE, default=None)
+    fecha = models.DateTimeField(auto_now_add=True)
     dateTime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '{"variable": %s, "measurement": %s, "limitExceeded": %s, "dateTime": %s}' % (self.variable.name, self.measurement.value, self.limitExceeded, self.dateTime)
+        return '{"cliente": %s, "MRI": %s, "fecha": %s, "dateTime": %s}' % (self.cliente.name, self.MRI.descripcion, self.MRI.fecha, self.dateTime)
     
     def toJson(self):
         alarm = {
             'id': self.id,
-            'variable': self.variable.name,
-            'measurement': self.measurement.value,
-            'value': self.value,
+            'cliente': self.cliente.name,
+            'MRI': self.MRI.descripcion,
+            'fecha': self.MRI.fecha,
             'dateTime': self.dateTime,
-            'limitExceeded': self.limitExceeded
+          
         }
         return alarm
