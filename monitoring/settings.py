@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import google.cloud.logging 
+import google.cloud.logging
 from google.cloud.logging.handlers import CloudLoggingHandler
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -138,3 +138,31 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static', 'media')
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'cloud_logging': {
+            'level': 'INFO',  
+            'class': 'google.cloud.logging.handlers.CloudLoggingHandler',
+            'client': google.cloud.logging.Client(),
+            'name': 'django-app',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'cloud_logging'],  
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+    'root': {  
+        'handlers': ['console', 'cloud_logging'],
+        'level': 'WARNING',
+    },
+}
