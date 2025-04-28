@@ -24,5 +24,6 @@ urlpatterns = [
     path('', include('MRI.urls')),
     path('', include('cliente.urls')),
     path('', include('alarms.urls')),
-    
+    path('error/', views.mi_vista_de_prueba, name='error')
+
 ]
