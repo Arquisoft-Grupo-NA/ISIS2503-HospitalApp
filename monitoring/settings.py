@@ -8,7 +8,11 @@ import os
 import logging
 import google.cloud.logging
 from google.cloud.logging.handlers import CloudLoggingHandler
+from cryptography.fernet import Fernet
 
+
+FERNET_KEY = b'J0NTjkfBO78cRKilEAno-VjmqIzPtuAHDvdfBXmrp6I='
+HMAC_SECRET = b'\x94\xc93\x10\x97\xd3\xe0*\x98J\x8b2\x8bq\xd4e\xf6J\x1e!\xec\xeb\xff\xae\xaeL\x8c\xa1\x07\x88b"'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
