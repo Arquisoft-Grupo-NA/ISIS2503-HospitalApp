@@ -39,6 +39,7 @@ def create_mri(form):
     try:
         mri = form.save() 
         mri.descripcion = encrypt(mri.descripcion) 
+        print("HOLAAA")
         print(mri.descripcion)
         mri.save()
         logger.info(f"MRI creado exitosamente")
