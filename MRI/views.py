@@ -8,6 +8,7 @@ from .logic.logic_MRI import get_mris
 from cliente.logic.cliente_logic import get_clientes
 from monitoring.crypto import decrypt
 import logging
+from MRI.logic.logic_MRI import create_mri
 
 logger = logging.getLogger('django')
 
@@ -29,17 +30,13 @@ def MRI_create(request):
         form = MRIForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, 'MRI creado exitosamente')
-            return HttpResponseRedirect(reverse('MRICreate'))
+            create_mri(form)
     else:
         form = MRIForm()
     
 
     clientes = get_clientes()
-    for cliente in clientes:
-        print(cliente.name)
     
-
     context = {
         'form': form,
         'clientes': clientes,
