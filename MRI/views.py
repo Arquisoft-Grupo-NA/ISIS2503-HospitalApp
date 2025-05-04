@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .logic.logic_MRI import create_mri, get_mris
+from cliente.logic.cliente_logic import get_clientes
 
 def MRI_list(request):
     mris = get_mris()
@@ -27,7 +28,11 @@ def MRI_create(request):
     else:
         form = MRIForm()
 
+    # Obtén los clientes con los nombres desencriptados
+    clientes = get_clientes()
+
     context = {
         'form': form,
+        'clientes': clientes,  # Pasa los clientes desencriptados al contexto si es necesario
     }
     return render(request, 'MRI/MRICreate.html', context)
