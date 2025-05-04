@@ -17,9 +17,4 @@ class MRIForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(MRIForm, self).__init__(*args, **kwargs)
         clientes = get_clientes()
-        for cliente in clientes:
-            try:
-                cliente.name = decrypt(cliente.name)
-            except Exception as e:
-                cliente.name = None
         self.fields['cliente'].queryset = clientes
