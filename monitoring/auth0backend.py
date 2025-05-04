@@ -5,11 +5,11 @@ def getRole(request):
     user = request.user
     auth0user = user.social_auth.filter(provider="auth0")[0]
     accessToken = auth0user.extra_data['access_token']
-    url = "https://dominio_auth0_tenant.auth0.com/userinfo"
+    url = "https://MRI/api/userinfo"
     headers = {'authorization': 'Bearer ' + accessToken}
     resp = requests.get(url, headers=headers)
     userinfo = resp.json()
-    role = userinfo['dominio_auth0_tenant.auth0.com/role']
+    role = userinfo['https://MRI/api/role']
     return (role)
 
 
