@@ -24,9 +24,10 @@ def MRI_create(request):
     clientes = Cliente.objects.all()  
     for cliente in clientes:
         try:
-            cliente.name = decrypt(cliente.name) 
+            cliente.name = decrypt(cliente.name)
         except Exception as e:
             logger.error(f"Error al desencriptar el nombre del cliente: {str(e)}")
+            cliente.name = 'Error al descifrar'
 
     if request.method == 'POST':
         form = MRIForm(request.POST)
@@ -41,6 +42,6 @@ def MRI_create(request):
 
     context = {
         'form': form,
-        'clientes': clientes,  
+        'clientes': clientes,
     }
     return render(request, 'MRI/MRICreate.html', context)
