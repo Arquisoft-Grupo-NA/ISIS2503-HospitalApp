@@ -11,7 +11,7 @@ from django.http import HttpResponse
 @login_required
 def cliente_list(request):
     role = getRole(request)
- 
+
     if role == "Gerencia Campus":
         clientes = get_clientes()
         context = {
@@ -19,7 +19,7 @@ def cliente_list(request):
         }
         return render(request, 'cliente/clientes.html', context)
     else:
-        return HttpResponse(f"Unauthorized User: role is '{role}'")
+        return HttpResponse("Unauthorized User")
 
 @login_required
 def cliente_create(request):
