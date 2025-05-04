@@ -6,6 +6,7 @@ from .forms import ClienteForm
 from .logic.cliente_logic import get_clientes, create_cliente
 from monitoring.auth0backend import getRole
 
+@login_required
 def cliente_list(request):
     role = getRole(request)
     if role == "Gerencia Campus":
@@ -17,6 +18,7 @@ def cliente_list(request):
     else:
         return HttpResponse("Unauthorized User")
 
+@login_required
 def cliente_create(request):
     role = getRole(request)
     if role == "Gerencia Campus":

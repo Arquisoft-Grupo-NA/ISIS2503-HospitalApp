@@ -5,6 +5,7 @@ logger = logging.getLogger('django')
 
 from ..models import Cliente
 
+
 def get_clientes():
     logger.info("Consulta de todos los clientes solicitada.")
     queryset = Cliente.objects.all()
