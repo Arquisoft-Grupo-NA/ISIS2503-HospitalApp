@@ -37,6 +37,7 @@ def update_mri(mri_pk, new_data):
 
 def create_mri(form):
     try:
+        print("Entrando en el bloque try")
         mri = form.save() 
         mri.descripcion = encrypt(mri.descripcion) 
         print("HOLAAA")
@@ -45,5 +46,6 @@ def create_mri(form):
         logger.info(f"MRI creado exitosamente")
         return mri
     except Exception as e:
+        print(f"Error: {str(e)}")
         logger.error(f"Error creando MRI: {str(e)}")
         raise e
