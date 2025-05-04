@@ -29,15 +29,3 @@ def generate_alarm(request, variable_id):
     else:
         return JsonResponse({'message': 'No alarm created'}, status=200)
 
-
-
-
-    for mri in mris:
-        if mri.value >= 30:
-            createAlarm = True
-            upperMeasurement = measurement
-    if createAlarm:
-        alarm = create_alarm(variable, upperMeasurement, 30)
-        return JsonResponse(alarm.toJson(), safe=False)
-    else:
-        return JsonResponse({'message': 'No alarm created'}, status=200)
