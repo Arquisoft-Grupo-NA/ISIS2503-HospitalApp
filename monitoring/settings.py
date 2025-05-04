@@ -18,6 +18,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = 'svm_)tpa-o^gkn@81sel&lapq2jc7^^-n9c+4y&f9rymz$kum_'
+
+DJANGO_ENV = os.getenv('DJANGO_ENV', 'development')
+
+if DJANGO_ENV == 'production':
+    import google.cloud.logging
+    cloud_logging_client = google.cloud.logging.Client()
+    cloud_logging_client.setup_logging()
+else:
+    print("Cloud Logging está desactivado en modo desarrollo.")
+
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
