@@ -9,4 +9,4 @@ class MRI(models.Model):
     descripcion = models.TextField(default="Sin descripcion")
 
     def __str__(self):
-        return '%s %s' % (self.cliente, self.descripcion)
+        return '%s %s' % (self.cliente.name, self.descripcion)
