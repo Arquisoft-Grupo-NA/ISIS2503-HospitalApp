@@ -10,8 +10,13 @@ def get_clientes():
     logger.info("Consulta de todos los clientes solicitada.")
     queryset = Cliente.objects.all()
     for cliente in queryset:
-        cliente.name = decrypt(cliente.name)
-    return (queryset)
+        try:
+            cliente.name = decrypt(cliente.name)
+        except Exception as e:
+            logger.error(f"Error al descifrar el nombre del cliente con ID {cliente.id}: {str(e)}")
+            cliente.name = None
+    return queryset
+
 
 def get_cliente_by_id(cliente_id):
     try:
