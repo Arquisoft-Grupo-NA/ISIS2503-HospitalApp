@@ -26,6 +26,7 @@ def getRole(request: HttpRequest):
         resp.raise_for_status()
         userinfo = resp.json()
         role = userinfo.get('https://dev-7gjasd3m5ecgyzk7.us.auth0.com/role')
+        
         return role
     except requests.RequestException as e:
         # Loguear el error si es necesario
