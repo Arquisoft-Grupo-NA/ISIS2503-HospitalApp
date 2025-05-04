@@ -1,6 +1,6 @@
 from django import forms
 from .models import MRI
-from cliente.logic.logic_cliente import get_clientes
+from cliente.logic.cliente_logic import get_clientes
 from monitoring.crypto import decrypt
 
 class MRIForm(forms.ModelForm):
