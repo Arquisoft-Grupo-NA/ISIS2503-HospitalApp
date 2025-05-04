@@ -4,7 +4,7 @@ from cryptography.fernet import Fernet
 from django.conf import settings
 
 fernet = Fernet(settings.FERNET_KEY)
-HMAC_SECRET = settings.HMAC_SECRET.encode()
+HMAC_SECRET = settings.HMAC_SECRET
 
 def encrypt(data: str) -> str:
     return fernet.encrypt(data.encode()).decode()
