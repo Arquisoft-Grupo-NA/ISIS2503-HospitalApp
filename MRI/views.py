@@ -5,7 +5,11 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .logic.logic_MRI import create_mri, get_mris
-from cliente.logic.cliente_logic import get_clientes
+from cliente.models import Cliente
+from monitoring.crypto import decrypt
+import logging
+
+logger = logging.getLogger('django')
 
 def MRI_list(request):
     mris = get_mris()
@@ -17,6 +21,13 @@ def MRI_list(request):
     return render(request, 'MRI/MRI.html', {'page_obj': page_obj})
 
 def MRI_create(request):
+    clientes = Cliente.objects.all()  
+    for cliente in clientes:
+        try:
+            cliente.name = decrypt(cliente.name) 
+        except Exception as e:
+            logger.error(f"Error al desencriptar el nombre del cliente: {str(e)}")
+
     if request.method == 'POST':
         form = MRIForm(request.POST)
         if form.is_valid():
@@ -28,11 +39,8 @@ def MRI_create(request):
     else:
         form = MRIForm()
 
-    # Obtén los clientes con los nombres desencriptados
-    clientes = get_clientes()
-
     context = {
         'form': form,
-        'clientes': clientes,  # Pasa los clientes desencriptados al contexto si es necesario
+        'clientes': clientes,  
     }
     return render(request, 'MRI/MRICreate.html', context)
