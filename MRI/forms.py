@@ -18,4 +18,4 @@ class MRIForm(forms.ModelForm):
             'descripcion' : 'Descripcion'
         }
 
-cliente = forms.ModelChoiceField(queryset=Cliente.objects.all(), empty_label="Selecciona un cliente")
+cliente = forms.ModelChoiceField(queryset=Cliente.objects.all(), empty_label="Selecciona un cliente", to_field_name='name')
