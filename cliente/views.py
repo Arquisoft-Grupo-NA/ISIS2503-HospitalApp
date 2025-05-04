@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import ClienteForm
 from .logic.cliente_logic import get_clientes, create_cliente
+from django.contrib.auth.decorators import login_required
 from monitoring.auth0backend import getRole
 
 @login_required
