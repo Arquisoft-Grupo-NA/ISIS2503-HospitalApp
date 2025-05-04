@@ -1,38 +1,16 @@
 import requests
 from social_core.backends.oauth import BaseOAuth2
 
-import requests
-from django.http import HttpRequest
-
-def getRole(request: HttpRequest):
+def getRole(request):
     user = request.user
-
-    # Verifica si tiene autenticación con Auth0
-    auth0_users = user.social_auth.filter(provider="auth0")
-    if not auth0_users.exists():
-        return None  # o lanzar una excepción, según tu lógica
-
-    auth0user = auth0_users.first()
-    access_token = auth0user.extra_data.get('access_token')
-
-    if not access_token:
-        return None  # o lanzar una excepción
-
+    auth0user = user.social_auth.filter(provider="auth0")[0]
+    accessToken = auth0user.extra_data['access_token']
     url = "https://dev-7gjasd3m5ecgyzk7.us.auth0.com/userinfo"
-    headers = {'Authorization': f'Bearer {access_token}'}
-
-    try:
-        resp = requests.get(url, headers=headers)
-        resp.raise_for_status()
-        userinfo = resp.json()
-        role = userinfo.get('https://dev-7gjasd3m5ecgyzk7.us.auth0.com/role')
-        
-        return role
-    except requests.RequestException as e:
-        # Loguear el error si es necesario
-        print(f"Error fetching user info: {e}")
-        return None
-
+    headers = {'authorization': 'Bearer ' + accessToken}
+    resp = requests.get(url, headers=headers)
+    userinfo = resp.json()
+    role = userinfo['dev-7gjasd3m5ecgyzk7.us.auth0.com/role']
+    return (role)
 
 
 
