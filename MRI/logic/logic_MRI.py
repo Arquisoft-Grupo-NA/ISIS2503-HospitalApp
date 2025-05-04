@@ -36,6 +36,7 @@ def update_mri(mri_pk, new_data):
         return None
 
 def create_mri(form):
+    print("Se está creando un MRI")
     try:
         print("Entrando en el bloque try")
         mri = form.save() 
