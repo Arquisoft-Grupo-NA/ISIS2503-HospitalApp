@@ -12,6 +12,7 @@ def get_mris():
             mri.descripcion = decrypt(mri.descripcion)
         except Exception as e:
             logger.error(f"Error al desencriptar la descripción del MRI con ID {mri.id}: {str(e)}")
+            print("Error al desencriptar la descripción del MRI:", str(e))
             mri.descripcion = 'Descripción no disponible'
     return queryset
 
@@ -36,7 +37,7 @@ def update_mri(mri_pk, new_data):
 
 def create_mri(form):
     try:
-        mri = form.save(commit=False) 
+        mri = form.save() 
         mri.descripcion = encrypt(mri.descripcion) 
         mri.save()
         logger.info(f"MRI creado exitosamente")

@@ -6,12 +6,17 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .logic.logic_MRI import get_mris
 from cliente.logic.cliente_logic import get_clientes
+from monitoring.crypto import decrypt
 import logging
 
 logger = logging.getLogger('django')
 
 def MRI_list(request):
     mris = get_mris()
+
+    for mri in mris:
+        mri.cliente.name = decrypt(mri.cliente.name)
+
     paginator = Paginator(mris, 10)  
 
     page_number = request.GET.get('page')
