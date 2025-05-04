@@ -6,6 +6,7 @@ from .forms import ClienteForm
 from .logic.cliente_logic import get_clientes, create_cliente
 from django.contrib.auth.decorators import login_required
 from monitoring.auth0backend import getRole
+from django.http import HttpResponse
 
 @login_required
 def cliente_list(request):
