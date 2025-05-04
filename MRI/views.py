@@ -31,6 +31,9 @@ def MRI_create(request):
     
 
     clientes = get_clientes()
+    for cliente in clientes:
+        print(cliente.name)
+    
 
     context = {
         'form': form,
