@@ -2,13 +2,17 @@ import logging
 from monitoring.crypto import encrypt, decrypt
 logger = logging.getLogger('django')
 
-from ..models import MRI, Cliente
+from ..models import MRI
 
 def get_mris():
     logger.info("Consulta de todos los MRIs solicitada.")
     queryset = MRI.objects.all().order_by('id')
     for mri in queryset:
-        mri.descripcion = decrypt(mri.descripcion)
+        try:
+            mri.descripcion = decrypt(mri.descripcion)
+        except Exception as e:
+            logger.error(f"Error al desencriptar la descripción del MRI con ID {mri.id}: {str(e)}")
+            mri.descripcion = 'Descripción no disponible'
     return queryset
 
 
@@ -32,11 +36,11 @@ def update_mri(mri_pk, new_data):
 
 def create_mri(form):
     try:
-        measurement = form.save()
-        measurement.descripcion = encrypt(measurement.descripcion)
-        measurement.save()
+        mri = form.save(commit=False) 
+        mri.descripcion = encrypt(mri.descripcion) 
+        mri.save()
         logger.info(f"MRI creado exitosamente")
-        return ()
+        return mri
     except Exception as e:
         logger.error(f"Error creando MRI: {str(e)}")
         raise e
