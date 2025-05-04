@@ -1,6 +1,6 @@
 from django import forms
 from .models import MRI
-from cliente.models import Cliente
+from cliente.logic.logic_cliente import get_clientes
 from monitoring.crypto import decrypt
 
 class MRIForm(forms.ModelForm):
@@ -16,7 +16,7 @@ class MRIForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(MRIForm, self).__init__(*args, **kwargs)
-        clientes = Cliente.objects.all()  
+        clientes = get_clientes()
         for cliente in clientes:
             try:
                 cliente.name = decrypt(cliente.name)
