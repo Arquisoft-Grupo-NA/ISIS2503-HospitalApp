@@ -17,7 +17,7 @@ def cliente_create(request):
         form = ClienteForm(request.POST)
         if form.is_valid():
             create_cliente(form)
-            messages.add_message(request, messages.SUCCESS, 'Successfully created cliente')
+            messages.add_message(request, messages.SUCCESS, 'Cliente creado exitosamente')
             return HttpResponseRedirect(reverse('clienteCreate'))
         else:
             print(form.errors)

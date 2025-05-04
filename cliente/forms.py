@@ -4,9 +4,8 @@ from .models import Cliente
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = [
-            'name',
-        ]
+        fields = ['name', 'info_personal']
         labels = {
-            'name': 'Name',
+            'name': 'Nombre',
+            'info_personal': 'Información Personal'
         }
