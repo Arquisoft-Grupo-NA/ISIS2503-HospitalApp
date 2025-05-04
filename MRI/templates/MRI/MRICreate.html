@@ -22,7 +22,27 @@
 
             <form method="POST">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <div class="form-group">
+                    <label for="{{ form.cliente.id_for_label }}">Cliente:</label>
+                    <select class="form-control" id="{{ form.cliente.id_for_label }}" name="cliente">
+                        <option value="">Selecciona un cliente</option>
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.id }}">{{ cliente.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.fecha.id_for_label }}">Fecha:</label>
+                    {{ form.fecha }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.hora.id_for_label }}">Hora:</label>
+                    {{ form.hora }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.descripcion.id_for_label }}">Descripción:</label>
+                    {{ form.descripcion }}
+                </div>
 
                 <div class="d-flex justify-content-between mt-4">
                     <a href="/" class="btn btn-outline-secondary">Cancelar</a>
