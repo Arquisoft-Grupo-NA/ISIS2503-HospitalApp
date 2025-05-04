@@ -7,4 +7,9 @@ class MRIForm(forms.ModelForm):
         model = MRI
         fields = ['cliente', 'fecha', 'hora', 'descripcion']
 
-    cliente = forms.ModelChoiceField(queryset=Cliente.objects.all(), empty_label="Selecciona un cliente")
+        labels = {
+            'cliente': 'Cliente',
+            'fecha': 'Fecha',
+            'hora': 'Hora',
+            'descripcion': 'Descripción'
+        }
