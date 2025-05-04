@@ -150,7 +150,7 @@ LOGIN_URL = "/login/auth0"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL ="https://MRI/api/v2/logout?returnTo=http%3A%2F%2F34.71.158.219:8080"
 SOCIAL_AUTH_TRAILING_SLASH = False # Remove end slash from routes
-SOCIAL_AUTH_AUTH0_DOMAIN = 'dominio_auth0_tenant.auth0.com'
+SOCIAL_AUTH_AUTH0_DOMAIN = 'https://MRI/api'
 SOCIAL_AUTH_AUTH0_KEY = 'HDMXN5FmEBR7PZYgsqpxu2X8lR1SDbyZ'
 SOCIAL_AUTH_AUTH0_SECRET = 'ejrOKjOh379Wdr0Hdr2o3kNAt2Sgn1wUpUUKZJ84_2djMl49gNQ63495JbrPrdSD'
 SOCIAL_AUTH_AUTH0_SCOPE = ['openid','profile','email','role',]
