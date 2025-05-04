@@ -148,7 +148,7 @@ if cloud_logging_handler:
 
 LOGIN_URL = "/login/auth0"
 LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL ="https://MRI/api/v2/logout?returnTo=http%3A%2F%2F34.71.158.219:8080"
+LOGOUT_REDIRECT_URL ="https://MRI/api/v2/logout?returnTo=http%3A%2F%2F34.172.211.192:8080"
 SOCIAL_AUTH_TRAILING_SLASH = False # Remove end slash from routes
 SOCIAL_AUTH_AUTH0_DOMAIN = 'https://MRI/api'
 SOCIAL_AUTH_AUTH0_KEY = 'HDMXN5FmEBR7PZYgsqpxu2X8lR1SDbyZ'
