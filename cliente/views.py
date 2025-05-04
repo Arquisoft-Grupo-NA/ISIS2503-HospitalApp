@@ -19,7 +19,7 @@ def cliente_list(request):
         }
         return render(request, 'cliente/clientes.html', context)
     else:
-        return HttpResponse("Unauthorized User")
+        return HttpResponse(f"Unauthorized User: role is '{role}'")
 
 @login_required
 def cliente_create(request):
