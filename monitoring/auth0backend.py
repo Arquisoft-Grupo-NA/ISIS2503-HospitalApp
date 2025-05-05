@@ -10,7 +10,7 @@ def getRole(request):
     resp = requests.get(url, headers=headers)
     userinfo = resp.json()
     role = userinfo['dev-7gjasd3m5ecgyzk7.us.auth0.com/role']
-    print(role)
+    print(userinfo)
     return (role)
 
 
