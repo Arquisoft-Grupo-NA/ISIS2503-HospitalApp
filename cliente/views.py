@@ -12,7 +12,7 @@ from django.http import HttpResponse
 def cliente_list(request):
     role = getRole(request)
 
-    if role == "Gerencia Campus":
+    if role == None:
         clientes = get_clientes()
         context = {
             'cliente_list': clientes
