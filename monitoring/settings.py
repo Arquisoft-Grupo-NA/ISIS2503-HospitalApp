@@ -153,5 +153,5 @@ SOCIAL_AUTH_TRAILING_SLASH = False # Remove end slash from routes
 SOCIAL_AUTH_AUTH0_DOMAIN = 'dev-7gjasd3m5ecgyzk7.us.auth0.com'
 SOCIAL_AUTH_AUTH0_KEY = 'HDMXN5FmEBR7PZYgsqpxu2X8lR1SDbyZ'
 SOCIAL_AUTH_AUTH0_SECRET = 'ejrOKjOh379Wdr0Hdr2o3kNAt2Sgn1wUpUUKZJ84_2djMl49gNQ63495JbrPrdSD'
-SOCIAL_AUTH_AUTH0_SCOPE = ['openid','profile','email','role',]
+SOCIAL_AUTH_AUTH0_SCOPE = ['openid','profile','email','role']
 AUTHENTICATION_BACKENDS = {'monitoring.auth0backend.Auth0','django.contrib.auth.backends.ModelBackend',}
