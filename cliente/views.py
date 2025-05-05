@@ -12,6 +12,9 @@ from django.http import HttpResponse
 def cliente_list(request):
     role = getRole(request)
 
+    if role == "no-auth0":
+        return HttpResponse("No autorizado: solo usuarios de Auth0 pueden acceder.")
+
     if role in ['missanoguga', 'sebastianmartinezarias']:
         clientes = get_clientes()
         context = {

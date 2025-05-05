@@ -3,17 +3,21 @@ from social_core.backends.oauth import BaseOAuth2
 
 def getRole(request):
     user = request.user
-    auth0user = user.social_auth.filter(provider="auth0")[0]
+    auth0user_qs = user.social_auth.filter(provider="auth0")
+
+    if not auth0user_qs.exists():
+        return "no-auth0"
+
+    auth0user = auth0user_qs[0]
     accessToken = auth0user.extra_data['access_token']
     url = "https://dev-7gjasd3m5ecgyzk7.us.auth0.com/userinfo"
-    headers = {'authorization': 'Bearer ' + accessToken}
+    headers = {'authorization': f'Bearer {accessToken}'}
     resp = requests.get(url, headers=headers)
-    
+
     userinfo = resp.json()
-    print(userinfo)
-    role = userinfo['nickname']
+    role = userinfo.get('nickname', 'sin-rol')
     
-    return (role)
+    return role
 
 
 
