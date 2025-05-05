@@ -24,7 +24,7 @@ def cliente_list(request):
 @login_required
 def cliente_create(request):
     role = getRole(request)
-    if role == "Gerencia Campus":
+    if role in ['missanoguga']:
         if request.method == 'POST':
             form = ClienteForm(request.POST)
             if form.is_valid():
