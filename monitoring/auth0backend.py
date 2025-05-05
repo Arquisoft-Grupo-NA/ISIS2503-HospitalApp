@@ -9,7 +9,7 @@ def getRole(request):
     headers = {'authorization': 'Bearer ' + accessToken}
     resp = requests.get(url, headers=headers)
     userinfo = resp.json()
-    role = userinfo['dev-7gjasd3m5ecgyzk7.us.auth0.com/role']
+    role = userinfo['https://dev-7gjasd3m5ecgyzk7.us.auth0.com/role']
     print(userinfo)
     return (role)
 
