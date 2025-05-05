@@ -3,10 +3,7 @@ from social_core.backends.oauth import BaseOAuth2
 
 def getRole(request):
     user = request.user
-    auth0user = user.social_auth.filter(provider="auth0").first()  
-    if not auth0user:
-        return "No Auth0 user found"  
-
+    auth0user = user.social_auth.filter(provider="auth0")[0]
     accessToken = auth0user.extra_data['access_token']
     url = "https://dev-7gjasd3m5ecgyzk7.us.auth0.com/userinfo"
     headers = {'authorization': 'Bearer ' + accessToken}
@@ -14,9 +11,10 @@ def getRole(request):
     
     userinfo = resp.json()
     print(userinfo)
-    role = userinfo.get('nickname', 'No nickname found')  
+    role = userinfo['nickname']
     
-    return role
+    return (role)
+
 
 
 class Auth0(BaseOAuth2):
