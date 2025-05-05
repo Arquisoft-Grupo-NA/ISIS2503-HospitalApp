@@ -7,13 +7,16 @@ from .logic.cliente_logic import get_clientes, create_cliente
 from django.contrib.auth.decorators import login_required
 from monitoring.auth0backend import getRole
 from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.conf import settings
 
 @login_required
 def cliente_list(request):
     role = getRole(request)
 
     if role == "no-auth0":
-        return HttpResponse("No autorizado: solo usuarios de Auth0 pueden acceder.")
+        return redirect(settings.LOGIN_URL)
+
 
     if role in ['missanoguga', 'sebastianmartinezarias']:
         clientes = get_clientes()
