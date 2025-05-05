@@ -30,6 +30,7 @@ def cliente_list(request):
 @login_required
 def cliente_create(request):
     role = getRole(request)
+    print(role)
     if role in ['missanoguga', 'sebastianmartinezarias']:
         if request.method == 'POST':
             form = ClienteForm(request.POST)
