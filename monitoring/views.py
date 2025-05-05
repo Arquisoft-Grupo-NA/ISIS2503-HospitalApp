@@ -14,3 +14,4 @@ def mi_vista_de_prueba(request):
     logger.info("Accediendo a la vista de prueba de error desde monitoring/views.py")
     raise ValueError("Este es un error de prueba intencional desde monitoring/views.py.")
     return HttpResponse("OK")
+

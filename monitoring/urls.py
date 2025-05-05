@@ -27,6 +27,6 @@ urlpatterns = [
     path('error/', views.mi_vista_de_prueba, name='error'),
     path(r'', include('django.contrib.auth.urls')),
     path(r'', include('social_django.urls'))
-
+    
 
 ]
