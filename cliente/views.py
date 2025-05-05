@@ -18,7 +18,7 @@ def cliente_list(request):
         return redirect(settings.LOGIN_URL)
 
 
-    if role in ['missanoguga', 'sebastianmartinezarias']:
+    if role in ['missanoguga', 'sebastianmartinezarias','m.canteg111']:
         clientes = get_clientes()
         context = {
             'cliente_list': clientes
