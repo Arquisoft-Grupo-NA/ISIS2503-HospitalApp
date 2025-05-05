@@ -12,7 +12,7 @@ from django.http import HttpResponse
 def cliente_list(request):
     role = getRole(request)
 
-    if role in ['missanoguga']:
+    if role in ['missanoguga', 'sebastianmartinezarias']:
         clientes = get_clientes()
         context = {
             'cliente_list': clientes
@@ -24,7 +24,7 @@ def cliente_list(request):
 @login_required
 def cliente_create(request):
     role = getRole(request)
-    if role in ['missanoguga']:
+    if role in ['missanoguga', 'sebastianmartinezarias']:
         if request.method == 'POST':
             form = ClienteForm(request.POST)
             if form.is_valid():
