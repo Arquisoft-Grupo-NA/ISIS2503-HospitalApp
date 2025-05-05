@@ -1,5 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
 import logging
 
 logger = logging.getLogger('django')
@@ -15,3 +18,6 @@ def mi_vista_de_prueba(request):
     raise ValueError("Este es un error de prueba intencional desde monitoring/views.py.")
     return HttpResponse("OK")
 
+def logout_view(request):
+    logout(request) 
+    return redirect('/')  
