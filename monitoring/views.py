@@ -15,5 +15,3 @@ def mi_vista_de_prueba(request):
     raise ValueError("Este es un error de prueba intencional desde monitoring/views.py.")
     return HttpResponse("OK")
 
-def callback_view(request):
-    return render(request, 'callback.html')
