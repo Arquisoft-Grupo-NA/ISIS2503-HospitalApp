@@ -29,9 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'MRI',
     'cliente',
-    'alarms',
     'social_django',
 ]
 
