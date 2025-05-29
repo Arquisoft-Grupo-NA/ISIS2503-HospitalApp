@@ -21,11 +21,8 @@ from .views import logout_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('health/', views.health_check, name='health'),
-    path('', views.index),
     path('clientes/', include('cliente.urls')),
     path('error/', views.mi_vista_de_prueba, name='error'),
-    path(r'', include('django.contrib.auth.urls')),
     path('logout/', logout_view, name='logout'),
-    
-
+    path('', views.index),
 ]
