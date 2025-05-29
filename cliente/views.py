@@ -1,51 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+
 from .forms import ClienteForm
 from .logic.cliente_logic import get_clientes, create_cliente
-from django.contrib.auth.decorators import login_required
-from monitoring.auth0backend import getRole
-from django.http import HttpResponse
-from django.shortcuts import redirect
-from django.conf import settings
 
-@login_required
 def cliente_list(request):
-    role = getRole(request)
+    clientes = get_clientes()
+    context = {
+        'cliente_list': clientes
+    }
+    return render(request, 'cliente/clientes.html', context)
 
-    if role == "no-auth0":
-        return redirect(settings.LOGIN_URL)
-
-
-    if role in ['missanoguga', 'sebastianmartinezarias','m.canteg111']:
-        clientes = get_clientes()
-        context = {
-            'cliente_list': clientes
-        }
-        return render(request, 'cliente/clientes.html', context)
-    else:
-        return HttpResponse(f"Unauthorized User: role is '{role}'")
-
-@login_required
 def cliente_create(request):
-    role = getRole(request)
-    print(role)
-    if role in ['missanoguga', 'sebastianmartinezarias']:
-        if request.method == 'POST':
-            form = ClienteForm(request.POST)
-            if form.is_valid():
-                create_cliente(form)
-                messages.add_message(request, messages.SUCCESS, 'Cliente creado exitosamente')
-                return HttpResponseRedirect(reverse('clienteCreate'))
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            create_cliente(form)
+            messages.success(request, 'Cliente creado exitosamente')
+            return HttpResponseRedirect(reverse('clienteCreate'))
         else:
-            form = ClienteForm()
-
-        context = {
-            'form': form,
-        }
-        return render(request, 'cliente/clienteCreate.html', context)
+            print(form.errors)
     else:
-        return HttpResponse("Unauthorized User")
+        form = ClienteForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'cliente/clienteCreate.html', context)
